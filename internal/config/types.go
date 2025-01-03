@@ -30,10 +30,13 @@ type FileConfig struct {
 }
 
 type MonitorConfig struct {
-	Interval  time.Duration `json:"interval"`
-	Whitelist []string      `json:"whitelist"`
-	Blacklist []string      `json:"blacklist"`
-	Users     []string      `json:"users"`
+	Interval time.Duration  `json:"interval"`
+	Filters  *FiltersConfig `json:"filters"`
+}
+type FiltersConfig struct {
+	Whitelist []string `json:"whitelist"`
+	Blacklist []string `json:"blacklist"`
+	Users     []string `json:"users"`
 }
 
 type ServerConfig struct {

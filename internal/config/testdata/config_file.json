@@ -8,7 +8,15 @@
 		}
 	],
 	"monitor": {
-		"interval": 30
+		"interval": 10,
+		"filters": {
+			"whitelist": [
+				"go"
+			],
+			"users": [
+				"alessandro"
+			]
+		}
 	},
 	"server": {
 		"port": 8080

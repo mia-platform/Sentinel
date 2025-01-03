@@ -89,22 +89,65 @@
         "interval": {
           "type": "number"
         },
-        "whitelist": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "blacklist": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "users": {
-          "type": "array",
-          "items": {
-            "type": "string"
+        "filters": {
+          "type": "object",
+          "properties": {
+            "whitelist": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "blacklist": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "users": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": false,
+          "anyOf": [
+            {
+              "required": [
+                "whitelist"
+              ]
+            },
+            {
+              "required": [
+                "blacklist"
+              ]
+            },
+            {
+              "required": [
+                "users"
+              ]
+            }
+          ],
+          "not": {
+            "allOf": [
+              {
+                "required": [
+                  "whitelist"
+                ]
+              },
+              {
+                "required": [
+                  "blacklist"
+                ]
+              }
+            ]
           }
         }
       },

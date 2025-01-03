@@ -5,7 +5,15 @@
 		}
 	],
 	"monitor": {
-		"interval": 60
+		"interval": 60,
+		"filters": {
+			"whitelist": [
+				"go"
+			],
+			"users": [
+				"alessandro"
+			]
+		}
 	},
 	"server": {
 		"port": 8080

@@ -54,8 +54,8 @@ func main() {
 	}
 
 	<-sysChan
-	time.Sleep(2 * time.Second)
 	fmt.Println("Sentinel agent terminated. Shutting down...")
+	time.Sleep(2 * time.Second)
 
 	close(sysChan)
 	os.Exit(exitCode)
