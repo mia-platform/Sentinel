@@ -1,0 +1,24 @@
+//selezionare cosa visualizzare come campi
+//sender output: stdout, webhook, file
+//selezione dei processi da monitorare: per user o per nome processo (array)
+
+
+// Example configuration file
+{
+	"output": {
+		"type": "stdout" // a value between stdout, file, httpEvent
+		"webhookURL": "http://localhost:8080" // connection string to the webhook
+	},
+	"monitor": {
+		"interval": 60 // interval in seconds
+		"whitelist": ["nginx", "apache"] // list of processes to monitor
+		"blacklist": ["systemd", "init"] // list of processes to ignore
+		"users": ["root", "www-data"] // list of users to monitor
+	},
+	"server": {
+		"port": 8080 // port to listen on
+	},
+	"advanced": {
+		"debug": false // enable debug mode
+		"omitScanning": ["processs.command", "process.user"] // list of fields to omit from the output
+}
