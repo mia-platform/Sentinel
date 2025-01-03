@@ -10,7 +10,16 @@ import (
 
 // fileWriter writes the event to a file in a specific path
 func WriteToFile(path string, event collector.Collector) error {
-	file, err := os.Open(path)
+	_, err := os.Stat(path)
+	if os.IsNotExist(err) {
+		_, err := os.Create(path)
+		if err != nil {
+			fmt.Printf("Error creating file: %v\n", err)
+			return err
+		}
+	}
+
+	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY, os.ModeAppend)
 	if err != nil {
 		return err
 	}
