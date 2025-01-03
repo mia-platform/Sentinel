@@ -3,7 +3,8 @@ package collector
 import (
 	"github.com/mia-platform/sentinel/internal/config"
 	"github.com/mia-platform/sentinel/pkg/collector/environment"
-	"github.com/mia-platform/sentinel/pkg/collector/processes"
+	gopsutilProcesses "github.com/mia-platform/sentinel/pkg/collector/processes/gopsutil"
+	//telegrafProcesses "github.com/mia-platform/sentinel/pkg/collector/processes/telegraf"
 )
 
 func Collect(filters *config.FiltersConfig) (Collector, error) {
@@ -12,7 +13,7 @@ func Collect(filters *config.FiltersConfig) (Collector, error) {
 		return Collector{}, err
 	}
 
-	processInfo, err := processes.GatherProcessInfo(filters)
+	processInfo, err := gopsutilProcesses.GatherProcessInfo(filters)
 	if err != nil {
 		return Collector{}, err
 	}

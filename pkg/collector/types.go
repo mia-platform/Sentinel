@@ -2,10 +2,10 @@ package collector
 
 import (
 	"github.com/mia-platform/sentinel/pkg/collector/environment"
-	"github.com/mia-platform/sentinel/pkg/collector/processes"
+	gopsutilProcesses "github.com/mia-platform/sentinel/pkg/collector/processes/gopsutil"
 )
 
 type Collector struct {
-	Environment environment.EnvironmentInfo `json:"environment"`
-	Processes   []processes.ProcessInfo     `json:"processes"`
+	Environment environment.EnvironmentInfo     `json:"environment"`
+	Processes   []gopsutilProcesses.ProcessInfo `json:"processes"`
 }
