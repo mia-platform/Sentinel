@@ -5,21 +5,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/mia-platform/sentinel/pkg/collector"
 )
 
-type VMStatus struct {
-	Hostname      string  `json:"hostname"`
-	VMID          string  `json:"vm_id"`
-	Environment   string  `json:"environment"`
-	CPUUsage      float64 `json:"cpu_usage"`
-	MemoryUsage   float64 `json:"memory_usage"`
-	DiskUsage     float64 `json:"disk_usage"`
-	ProcessStatus string  `json:"process_status"`
-	Timestamp     string  `json:"timestamp"`
-}
-
-func SendStatus(webhookURL string, status VMStatus) error {
-	jsonData, err := json.Marshal(status)
+func SendStatus(webhookURL string, event collector.Collector) error {
+	jsonData, err := json.Marshal(event)
 	if err != nil {
 		return err
 	}

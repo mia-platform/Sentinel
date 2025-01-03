@@ -2,17 +2,19 @@ package monitor
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"time"
 
-	"github.com/mia-platform/sentinel/pkg/collector"
 	"github.com/mia-platform/sentinel/internal/config"
+	"github.com/mia-platform/sentinel/internal/sender"
+	"github.com/mia-platform/sentinel/pkg/collector"
 )
 
 func Start(ctx context.Context, cfg config.Configuration) error {
 	ticker := time.NewTicker(cfg.Monitor.Interval)
 	defer ticker.Stop()
+
+	outputType := cfg.Output[0].Type
 
 	for {
 		select {
@@ -22,8 +24,22 @@ func Start(ctx context.Context, cfg config.Configuration) error {
 				fmt.Printf("Error collecting data: %v\n", err)
 				continue
 			}
-			data, _ := json.Marshal(collector)
-			fmt.Println(string(data)) // Qui invierai i dati al webhook
+
+			switch outputType {
+			case "webhook":
+				// Invia i dati al webhook
+			case "stdout":
+				fmt.Println(collector)
+			case "file":
+				err := sender.WriteToFile(cfg.Output[0].File.Path, collector)
+				if err != nil {
+					fmt.Printf("Error writing to file: %v\n", err)
+				}
+			default:
+				fmt.Printf("Output type %s not supported\n", outputType)
+			}
+
+			// Qui invierai i dati al webhook
 		case <-ctx.Done():
 			return nil
 		}

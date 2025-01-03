@@ -1,0 +1,23 @@
+{
+	"output": [
+		{
+			"type": "file",
+			"file": {
+				"path": "./eventsFile.log"
+			}
+		}
+	],
+	"monitor": {
+		"interval": 30
+	},
+	"server": {
+		"port": 8080
+	},
+	"advanced": {
+		"debug": true,
+		"omitScanning": [
+			"processs.command",
+			"process.user"
+		]
+	}
+}
