@@ -31,7 +31,11 @@ func (m *Monitor) Start(ctx context.Context) error {
 
 			switch outputType {
 			case "webhook":
-				// Invia i dati al webhook
+				event := interfaces.NewEvent(sentinelID, interfaces.SentinelMetrics, collector)
+				err := interfaces.SendToWebhook(m.output.Webhook.URL, *event)
+				if err != nil {
+					fmt.Printf("Error sending to webhook: %v\n", err)
+				}
 			case "stdout":
 				fmt.Println(collector)
 			case "file":

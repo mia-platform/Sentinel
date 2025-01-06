@@ -10,9 +10,9 @@ type EventType string
 
 const (
 	SentinelMetrics EventType = "sentinel:metrics"
-	ProcessSignal   EventType = "process:signal" // TO BE IMPLEMENTED
-	ProcessWatch    EventType = "process:watch"  // TO BE IMPLEMENTED
-	VmException     EventType = "vm:exception"   // TO BE IMPLEMENTED
+	ProcessSignal   EventType = "process:signal"   // TO BE IMPLEMENTED
+	ProcessWatch    EventType = "process:watch"    // TO BE IMPLEMENTED
+	SystemException EventType = "system:exception" // TO BE IMPLEMENTED
 	SentinelStatus  EventType = "sentinel:status"
 )
 

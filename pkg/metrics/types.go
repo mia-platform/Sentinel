@@ -6,7 +6,6 @@ import (
 )
 
 type Collector struct {
-	ID string `json:"id"`
 	system.SystemInfo
 	Processes []processes.ProcessInfo `json:"processes"`
 }

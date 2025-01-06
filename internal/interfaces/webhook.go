@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func SendStatus(webhookURL string, event event) error {
+func SendToWebhook(webhookURL string, event event) error {
 	jsonData, err := json.Marshal(event)
 	if err != nil {
 		return err
