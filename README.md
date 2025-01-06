@@ -1,6 +1,10 @@
-# SENTINEL Project
+# Sentinel Agent
+<div align="center">
+  <img src="sentinel.png" alt="Logo" style="width: 200px; height: auto;">
+</div>
+
 ## Introduction
-### What is SENTINEL?
+### What is Sentinel?
 
 Sentinel is a project that aims to provide a simple and easy-to-use tool for monitoring the status of your servers and processes. It is designed to be used with the [integration-connector-agent](https://github.com/mia-platform/integration-connector-agent).
 
