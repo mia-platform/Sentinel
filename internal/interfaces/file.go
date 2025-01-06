@@ -1,15 +1,13 @@
-package sender
+package interfaces
 
 import (
 	"encoding/json"
 	"fmt"
 	"os"
-
-	"github.com/mia-platform/sentinel/pkg/collector"
 )
 
 // fileWriter writes the event to a file in a specific path
-func WriteToFile(path string, event collector.Collector) error {
+func WriteToFile(path string, event event) error {
 	_, err := os.Stat(path)
 	if os.IsNotExist(err) {
 		file, err := os.Create(path)
@@ -44,4 +42,3 @@ func WriteToFile(path string, event collector.Collector) error {
 
 	return nil
 }
-

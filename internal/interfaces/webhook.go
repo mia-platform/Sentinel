@@ -1,15 +1,13 @@
-package sender
+package interfaces
 
 import (
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
-
-	"github.com/mia-platform/sentinel/pkg/collector"
 )
 
-func SendStatus(webhookURL string, event collector.Collector) error {
+func SendStatus(webhookURL string, event event) error {
 	jsonData, err := json.Marshal(event)
 	if err != nil {
 		return err

@@ -36,9 +36,11 @@ func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
+	m := monitor.New(*config)
+
 	// Avvia monitoraggio
 	go func() {
-		if err := monitor.Start(ctx, *config); err != nil {
+		if err := m.Start(ctx); err != nil {
 			fmt.Fprintf(os.Stderr, "Error starting monitor: %v\n", err)
 			cancel()
 		}

@@ -3,6 +3,7 @@ package config
 import "time"
 
 type Configuration struct {
+	ID			 string         `json:"id"`
 	Output   []OutputConfig `json:"output"`
 	Monitor  MonitorConfig  `json:"monitor"`
 	Server   ServerConfig   `json:"server"`

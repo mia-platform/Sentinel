@@ -68,8 +68,8 @@ Actually only this pairs of filters are supported:
 - whitelist
 - blacklist
 - users
-- whitelist and users
-- blacklist and users
+- whitelist + users
+- blacklist + users
 
 NB: whitelist and blacklist are mutually exclusive
 

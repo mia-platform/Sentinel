@@ -5,6 +5,7 @@ go 1.23.2
 require (
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gofiber/fiber/v2 v2.52.5
+	github.com/google/uuid v1.6.0
 	github.com/mia-platform/glogger/v4 v4.2.0
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/sirupsen/logrus v1.9.3
@@ -16,7 +17,6 @@ require (
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
-	github.com/google/uuid v1.6.0 // indirect
 	github.com/klauspost/compress v1.17.10 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect

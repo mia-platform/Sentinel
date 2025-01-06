@@ -6,28 +6,24 @@ import (
 	"time"
 
 	"github.com/mia-platform/sentinel/internal/config"
-	"github.com/mia-platform/sentinel/internal/sender"
-	"github.com/mia-platform/sentinel/pkg/collector"
+	"github.com/mia-platform/sentinel/internal/interfaces"
+	"github.com/mia-platform/sentinel/pkg/metrics"
 )
 
-func Start(ctx context.Context, cfg config.Configuration) error {
-	var filters *config.FiltersConfig
-	filters = nil
-	ticker := time.NewTicker(cfg.Monitor.Interval)
+func (m *Monitor) Start(ctx context.Context) error {
+	sentinelID := m.id
+	filters := m.config.Filters
+	ticker := time.NewTicker(m.config.Interval)
 	defer ticker.Stop()
 
-	outputType := cfg.Output[0].Type
+	outputType := m.output.Type
 
-	fmt.Printf("Filters: %v\n", cfg.Monitor.Filters)
-
-	if cfg.Monitor.Filters != nil {
-		filters = cfg.Monitor.Filters
-	}
+	fmt.Printf("Filters: %v\n", filters)
 
 	for {
 		select {
 		case <-ticker.C:
-			collector, err := collector.Collect(filters)
+			collector, err := metrics.Collect(filters)
 			if err != nil {
 				fmt.Printf("Error collecting data: %v\n", err)
 				continue
@@ -39,7 +35,8 @@ func Start(ctx context.Context, cfg config.Configuration) error {
 			case "stdout":
 				fmt.Println(collector)
 			case "file":
-				err := sender.WriteToFile(cfg.Output[0].File.Path, collector)
+				event := interfaces.NewEvent(sentinelID, interfaces.SentinelMetrics, collector)
+				err := interfaces.WriteToFile(m.output.File.Path, *event)
 				if err != nil {
 					fmt.Printf("Error writing to file: %v\n", err)
 				}
@@ -52,4 +49,31 @@ func Start(ctx context.Context, cfg config.Configuration) error {
 			return nil
 		}
 	}
+}
+
+func New(cfg config.Configuration) Monitor {
+	return Monitor{
+		id:        cfg.ID,
+		startTime: uint64(time.Now().Unix()),
+		config:    cfg.Monitor,
+		output:    cfg.Output[0],
+		status:    idle,
+	}
+}
+
+func (m *Monitor) Stop() error {
+	m.status = stopped
+	return nil
+}
+
+func (m *Monitor) Status() MonitorStatus {
+	return m.status
+}
+
+func (m *Monitor) Uptime() uint64 {
+	return uint64(time.Now().Unix()) - m.startTime
+}
+
+func (m *Monitor) Config() config.MonitorConfig {
+	return m.config
 }

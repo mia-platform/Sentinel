@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"embed"
 	"encoding/json"
+	"github.com/google/uuid"
 
 	"github.com/xeipuuv/gojsonschema"
 )
@@ -33,6 +34,10 @@ func LoadServiceConfiguration(filePath string) (*Configuration, error) {
 	var config *Configuration
 	if err := json.Unmarshal(jsonConfig, &config); err != nil {
 		return nil, fmt.Errorf("%w: %s", ErrConfigNotValid, err)
+	}
+
+	if config.ID == "" {
+		config.ID = "sentinel-" + uuid.New().String()
 	}
 
 	return config, nil
