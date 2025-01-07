@@ -1,0 +1,31 @@
+{
+	"output": [
+		{
+			"type": "file",
+			"file": {
+				"path": "./eventsFile/file.log"
+			}
+		}
+	],
+	"monitor": {
+		"interval": 10,
+		"filters": {
+			"whitelist": [
+				"go"
+			],
+			"users": [
+				"alessandro"
+			]
+		}
+	},
+	"server": {
+		"port": 8080
+	},
+	"advanced": {
+		"debug": true,
+		"omitScanning": [
+			"processs.command",
+			"process.user"
+		]
+	}
+}

@@ -37,7 +37,8 @@ func (m *Monitor) Start(ctx context.Context) error {
 					fmt.Printf("Error sending to webhook: %v\n", err)
 				}
 			case "stdout":
-				fmt.Println(collector)
+				event := interfaces.NewEvent(sentinelID, interfaces.SentinelMetrics, collector)
+				fmt.Println(event)
 			case "file":
 				event := interfaces.NewEvent(sentinelID, interfaces.SentinelMetrics, collector)
 				err := interfaces.WriteToFile(m.output.File.Path, *event)
@@ -48,7 +49,6 @@ func (m *Monitor) Start(ctx context.Context) error {
 				fmt.Printf("Output type %s not supported\n", outputType)
 			}
 
-			// Qui invierai i dati al webhook
 		case <-ctx.Done():
 			return nil
 		}

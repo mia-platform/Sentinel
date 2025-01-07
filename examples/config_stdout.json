@@ -1,0 +1,28 @@
+{
+	"output": [
+		{
+			"type": "stdout"
+		}
+	],
+	"monitor": {
+		"interval": 60,
+		"filters": {
+			"whitelist": [
+				"go"
+			],
+			"users": [
+				"alessandro"
+			]
+		}
+	},
+	"server": {
+		"port": 8080
+	},
+	"advanced": {
+		"debug": true,
+		"omitScanning": [
+			"processs.command",
+			"process.user"
+		]
+	}
+}

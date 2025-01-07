@@ -89,8 +89,18 @@ To develop the service locally you need:
 Go 1.23+
 To start the application locally
 
+1. Export the environment variables
+
 ```shell
-go run .
+export CONFIGURATION_PATH=<path_to_configuration_file>
+```
+
+i.e. you can use one of the example configuration files in the `/example` folder
+
+1. Run the service
+
+```shell
+go run ./cmd/agent/main.go
 ```
 
 By default the service will run on port 8080
