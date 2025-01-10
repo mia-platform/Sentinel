@@ -8,7 +8,7 @@
 		}
 	],
 	"monitor": {
-		"interval": 10,
+		"interval": 30,
 		"filters": {
 			"whitelist": [
 				"go"
@@ -24,7 +24,7 @@
 	"advanced": {
 		"debug": true,
 		"omitScanning": [
-			"processs.command",
+			"process.command",
 			"process.user"
 		]
 	}

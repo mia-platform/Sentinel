@@ -13,7 +13,7 @@ import (
 func (m *Monitor) Start(ctx context.Context) error {
 	sentinelID := m.id
 	filters := m.config.Filters
-	ticker := time.NewTicker(m.config.Interval)
+	ticker := time.NewTicker(m.config.Interval*time.Second)
 	defer ticker.Stop()
 
 	outputType := m.output.Type

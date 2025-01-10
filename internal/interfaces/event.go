@@ -13,18 +13,9 @@ const (
 	ProcessSignal   EventType = "process:signal"   // TO BE IMPLEMENTED
 	ProcessWatch    EventType = "process:watch"    // TO BE IMPLEMENTED
 	SystemException EventType = "system:exception" // TO BE IMPLEMENTED
-	SentinelStatus  EventType = "sentinel:status"
+	SentinelStatus  EventType = "sentinel:status"  // TO BE IMPLEMENTED
 )
 
-// EventPayload represents the payload of an event sent to the webhook
-// it contains the timestamp of the event and the type of the event
-// it also contains the data of the event that can be of different types
-// if it's a vm:metrics event it contains the environment metrics of the vm and the processs metrics of the monitored processes
-// if it's a process:signal event it contains the signal that was sent by a specific process to the sentinel through the Sentinel API
-// if it's a process:watch event it contains information about the process that is watched by the sentinel for example if the process died or if the process is consuming too much memory
-// if it's a vm:exception event it contains critical information about the vm that the sentinel is monitoring (where sentinel is running)
-// if it's a sentinel:status event it contains information about the status of the sentinel (if it's running or not, when it started or stopped)
-// the data field is an interface{} because the data can be of different types
 type event struct {
 	ID         string      `json:"id"`
 	Timestamp  string      `json:"timestamp"`

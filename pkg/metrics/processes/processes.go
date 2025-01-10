@@ -8,11 +8,8 @@ import (
 )
 
 // func filterProcesses(filter config.Filter) []*process.Process
-func filterProcesses(filter config.FiltersConfig) ([]*process.Process, error) {
-	procs, _ := process.Processes()
+func filterProcesses(filter config.FiltersConfig, procs []*process.Process) ([]*process.Process, error) {
 	var filteredProcs []*process.Process
-
-	fmt.Printf("Filtering processes %v\n", filter)
 
 	userFilter := len(filter.Users) > 0
 	whitelistFilter := len(filter.Whitelist) > 0
@@ -89,18 +86,16 @@ func GatherProcessInfo(filter *config.FiltersConfig) ([]ProcessInfo, error) {
 
 	filteredProcs = procs
 
-	numProcs := len(filteredProcs)
-	fmt.Printf("Found %d processes\n", numProcs)
-
 	if filter != nil {
-		filteredProcs, err = filterProcesses(*filter)
+		filteredProcs, err = filterProcesses(*filter, procs)
 		if err != nil {
-			return nil, err
+			fmt.Printf("Error filtering processes: %v\n", err)
+			return []ProcessInfo{}, err
 		}
 	}
 
 	numFilteredProcs := len(filteredProcs)
-	fmt.Printf("Filtered %d processes\n", numFilteredProcs)
+	fmt.Printf("Found %d processes\n", numFilteredProcs)
 
 	// Process filtering
 
